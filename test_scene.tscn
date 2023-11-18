@@ -1,0 +1,148 @@
+[gd_scene load_steps=4 format=3 uid="uid://dphgryblhdgw6"]
+
+[ext_resource type="Texture2D" uid="uid://dgyx0thf8cxqo" path="res://tirza-van-dijk-cNGUw-CEsp0-unsplash.jpg" id="1_rquq4"]
+[ext_resource type="Script" path="res://test_scene.gd" id="1_x03p3"]
+[ext_resource type="Material" uid="uid://bwakqqtao31rk" path="res://shader-material.tres" id="2_eihfh"]
+
+[node name="Node2D" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+script = ExtResource("1_x03p3")
+
+[node name="SplitContainer" type="SplitContainer" parent="."]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="SplitContainer"]
+layout_mode = 2
+
+[node name="GridContainer" type="FlowContainer" parent="SplitContainer/VBoxContainer2"]
+layout_direction = 2
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="SplitContainer/VBoxContainer2/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SplitContainer/VBoxContainer2/GridContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Steps"
+
+[node name="ColorSize" type="SpinBox" parent="SplitContainer/VBoxContainer2/GridContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 2.0
+max_value = 256.0
+value = 8.0
+
+[node name="Button" type="Button" parent="SplitContainer/VBoxContainer2/GridContainer/HBoxContainer3"]
+layout_mode = 2
+text = "Save"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="SplitContainer/VBoxContainer2/GridContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="SplitContainer/VBoxContainer2/GridContainer/HBoxContainer2"]
+layout_mode = 2
+text = "Auto Steps"
+
+[node name="AutoPlus" type="Button" parent="SplitContainer/VBoxContainer2/GridContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "➕"
+
+[node name="AutoMinus" type="Button" parent="SplitContainer/VBoxContainer2/GridContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "➖"
+
+[node name="AutoStop" type="Button" parent="SplitContainer/VBoxContainer2/GridContainer/HBoxContainer2"]
+layout_mode = 2
+text = "🛑"
+
+[node name="AutoAmount" type="SpinBox" parent="SplitContainer/VBoxContainer2/GridContainer/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 256.0
+value = 1.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SplitContainer/VBoxContainer2/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label2" type="Label" parent="SplitContainer/VBoxContainer2/GridContainer/HBoxContainer"]
+layout_mode = 2
+text = "Overlay Color/Amount"
+
+[node name="OverlayColor" type="ColorPickerButton" parent="SplitContainer/VBoxContainer2/GridContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "        "
+
+[node name="OverlayAmount" type="SpinBox" parent="SplitContainer/VBoxContainer2/GridContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+
+[node name="OverlayApply" type="CheckBox" parent="SplitContainer/VBoxContainer2/GridContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Apply"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="SplitContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="GridContainer" parent="SplitContainer/VBoxContainer2/ScrollContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SplitContainer/VBoxContainer2/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Color1Swap" type="ColorPickerButton" parent="SplitContainer/VBoxContainer2/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="SplitContainer"]
+unique_name_in_owner = true
+material = ExtResource("2_eihfh")
+layout_mode = 2
+size_flags_horizontal = 3
+texture = ExtResource("1_rquq4")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="SubViewport" type="SubViewport" parent="."]
+
+[node name="TextureRect2" type="TextureRect" parent="SubViewport"]
+unique_name_in_owner = true
+material = ExtResource("2_eihfh")
+size_flags_horizontal = 3
+texture = ExtResource("1_rquq4")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="value_changed" from="SplitContainer/VBoxContainer2/GridContainer/HBoxContainer3/ColorSize" to="." method="_on_spin_box_value_changed"]
+[connection signal="pressed" from="SplitContainer/VBoxContainer2/GridContainer/HBoxContainer3/Button" to="." method="_save_texture"]
+[connection signal="pressed" from="SplitContainer/VBoxContainer2/GridContainer/HBoxContainer2/AutoPlus" to="." method="_on_auto_plus_pressed"]
+[connection signal="pressed" from="SplitContainer/VBoxContainer2/GridContainer/HBoxContainer2/AutoMinus" to="." method="_on_auto_minus_pressed"]
+[connection signal="pressed" from="SplitContainer/VBoxContainer2/GridContainer/HBoxContainer2/AutoStop" to="." method="_on_auto_stop_pressed"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

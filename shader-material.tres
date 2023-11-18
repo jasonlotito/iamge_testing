@@ -1,0 +1,16 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bwakqqtao31rk"]
+
+[ext_resource type="Shader" path="res://test_scene.gdshader" id="1_tvs5t"]
+
+[resource]
+shader = ExtResource("1_tvs5t")
+shader_parameter/luminsence = Vector3(0.299, 0.587, 0.144)
+shader_parameter/swap_colors = null
+shader_parameter/do_swap_colors = true
+shader_parameter/do_edge_detect = false
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/border_color = Vector4(1, 1, 1, 1)
+shader_parameter/inside = false
+shader_parameter/size = 8
+shader_parameter/colors = null
